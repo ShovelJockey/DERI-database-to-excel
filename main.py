@@ -2,7 +2,6 @@ import csv
 
 
 class DBDataImport:
-    '''returns local authority data from CSV file '''
     def get_data(self, filename):
         with open(filename, newline='') as csvfile:
             data = csv.reader(csvfile, delimiter=',')
@@ -16,8 +15,17 @@ class DataMerge:
     'Birmingham', 'Coventry', 'Dudley', 'Herefordshire', 'Sandwell', 'Shropshire', 'Solihull', 'Staffordshire', 'Stoke-on-Trent', 
     'Telford and Wrekin', 'Walsall', 'Warwickshire', 'Wolverhampton', 'Worcestershire', 'Newcastle', 'North Tyneside', 'Northumberland'
     ]
+    LA_dict = {}
 
+    def list_to_dict_LA_data(self, list):
+        pass
+        for x in list:
+            if x[6] in self.Target_LA:
+                self.LA_dict[x[1]] = [x[2],x[1],x[4],x[6]]
+
+
+    def list_to_dict_LSAO_data(self):
+        pass
 
 class XlWriter:
     pass
-
