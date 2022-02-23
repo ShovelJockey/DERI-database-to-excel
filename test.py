@@ -48,6 +48,8 @@ class DataMergeTest(unittest.TestCase):
         actual = self.instance.dict_merge()
         assert(len(actual) == 2)
         assert(actual['E01010483'][0] == 'Wolverhampton 007B')
+        assert(actual['E01010199'][1] == 'E01010199')
+        assert(actual['E01010199'][4] == '2.27212279')
 
 
 unittest.main()

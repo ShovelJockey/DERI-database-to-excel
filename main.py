@@ -1,4 +1,5 @@
 import csv
+import xlsxwriter
 
 
 class DBDataImport:
@@ -37,5 +38,26 @@ class DataMerge:
 
 
 class XlWriter:
-    pass
+    workbook = xlsxwriter.Workbook('DERI.xlsx')
+    worksheet = workbook.add_worksheet()
+        
+    def write_Xl(self, combined_dict):
+        row = 0
+        for x in combined_dict.values():
+            self.worksheet.write_row(row, 0, x)
+            row += 1
+        self.workbook.close()
 
+
+if __name__ == '__main__':
+    db = DBDataImport()
+    dm = DataMerge()
+    xl = XlWriter()
+
+    LA_data = db.get_data('LSOA, ward and LA DB.csv')
+    DERI_data = db.get_data('LSOA calculations and scores (district level)_v1.4.csv')
+
+    dm.list_to_dict_LA_data(LA_data)
+    dm.list_to_dict_DERI_data(DERI_data)
+    combined_dict = dm.dict_merge()
+    xl.write_Xl(combined_dict)
